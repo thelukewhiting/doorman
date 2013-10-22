@@ -3,6 +3,6 @@ Doorman::Application.routes.draw do
 
   root :to => 'welcome#index'
  
-  get '/twilios/incoming', to: "twilios#incoming"
+  get '/voice/incoming', to: "voice#incoming"
 
 end
