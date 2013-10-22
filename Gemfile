@@ -7,6 +7,7 @@ gem 'rails', '3.2.14'
 
 gem 'pg'
 gem 'twilio-ruby'
+gem 'devise'
 
 
 # Gems used only for assets and not required
