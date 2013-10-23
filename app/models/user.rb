@@ -10,4 +10,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :account_sid
   # attr_accessible :title, :body
+
+  validates :account_sid, length: { is: 34 } 
+
 end

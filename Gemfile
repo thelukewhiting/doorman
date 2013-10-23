@@ -7,7 +7,12 @@ gem 'rails', '3.2.14'
 
 gem 'pg'
 gem 'twilio-ruby'
+
+# authentication
 gem 'devise'
+
+# helps correctly format phone numbers to the e.164 format
+gem 'phony_rails'
 
 
 # Gems used only for assets and not required

@@ -26,15 +26,17 @@ class SettingsController < ApplicationController
 
     newsetting = Setting.new
     newsetting.user_id = current_user.id
-    newsetting.message = params[:message]
-    newsetting.recipient = params[:recipient]
+    newsetting.message = params[:message] 
+    
+    # Uses phony_rails to normalize to the e164 format before saving
+    newsetting.recipient = params[:recipient].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
       
       if(params.has_key?(:autounlock))
         newsetting.autounlock = true
       else
         newsetting.autounlock = false
       end
-    
+
     newsetting.save
     
     redirect_to settings_path
@@ -45,6 +47,9 @@ class SettingsController < ApplicationController
   def update   
 
     editsetting = Setting.find_by_id(params[:id])
+
+    # Uses phony_rails to normalize to the e164 format before updating
+    params[:setting][:recipient] = params[:setting][:recipient].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
 
     editsetting.update_attributes(params[:setting])
 
