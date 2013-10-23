@@ -7,7 +7,6 @@ xml.Response do
   xml.Play( " ", :digits => "w0" )
   
   #Send text message
-  # xml.Sms( @message, :to => @recipient )
-  # xml.Sms( @message, :to => @another_recipient )
+  xml.Sms( @message, :to => @recipient )
 
 end
