@@ -1,0 +1,11 @@
+<br><br><b>Settings</b><br><br>
+
+<%= form_tag(settings_path, method: "post") do %>
+  <%= label_tag(:message, "Message:") %>
+  <%= text_field_tag(:message) %><br><br>
+  <%= label_tag(:recipient, "Recipient:") %>
+  <%= text_field_tag(:recipient) %><br><br>
+  <%= check_box_tag(:autounlock) %>
+  <%= label_tag(:autounlock, "Autounlock?") %><br><br>
+  <%= submit_tag("Save") %>
+<% end %>
