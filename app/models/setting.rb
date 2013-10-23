@@ -2,7 +2,7 @@ class Setting < ActiveRecord::Base
    
    belongs_to :user
 
-   attr_accessible :user_id, :autounlock
+   attr_accessible :user_id, :autounlock, :message, :recipient
 
    validates :autounlock, :inclusion => { :in => [true, false] }
 
