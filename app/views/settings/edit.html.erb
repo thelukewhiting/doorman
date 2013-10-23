@@ -1,0 +1,14 @@
+<br><br><b>Edit Your Settings</b><br><br>
+
+  <%= form_for @setting do  |f|  %>
+      <%= f.label :message %>
+      <%= f.text_field :message %>
+      <br>
+      <%= f.label :recipient %>
+      <%= f.text_field :recipient %>
+      <br>
+      <%= f.label :autounlock %>
+      <%= f.check_box :autounlock %>
+      <br>
+      <%= f.submit "Save" %>
+  <% end %>

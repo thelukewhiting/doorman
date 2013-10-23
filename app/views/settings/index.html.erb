@@ -1,13 +1,11 @@
+<br><br><%= link_to "Edit Settings", edit_setting_path(current_user.setting.id), method: :get %>
+
 <br><br>
 Message: <%= current_user.setting.message %>
 <br><br>
 Recipient: <%= current_user.setting.recipient %>
 <br><br>
 
-Auto-unlock is currently <%= @status %>.
+Autounlock: <%= @status %>
 
-<br>
-
-<br><%= link_to "Enable Autounlock", setting_path(current_user.id, :autounlock => true), method: :put %> |
-<%= link_to "Disable Autounlock", setting_path(current_user.id, :autounlock => false), method: :put %>
 

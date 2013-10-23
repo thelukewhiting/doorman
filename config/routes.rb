@@ -9,6 +9,5 @@ Doorman::Application.routes.draw do
   get '/voice/incoming', to: "voice#incoming"
 
   resources :settings
-
   
 end

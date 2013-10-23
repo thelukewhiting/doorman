@@ -15,6 +15,12 @@ class SettingsController < ApplicationController
 
   end
 
+  def edit
+
+    @setting = Setting.find_by_id(params[:id])
+
+  end
+
 
   def create
 
@@ -38,19 +44,9 @@ class SettingsController < ApplicationController
 
   def update   
 
-    user = User.find_by_id(params[:id])
-    
-    if params[:autounlock] == "false"
+    editsetting = Setting.find_by_id(params[:id])
 
-      user.setting.autounlock = false
-
-    else
-      
-      user.setting.autounlock = true
-
-    end    
-
-    user.setting.save
+    editsetting.update_attributes(params[:setting])
 
     redirect_to settings_path
 
