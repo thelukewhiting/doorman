@@ -8,8 +8,6 @@ Doorman::Application.routes.draw do
  
   get '/voice/incoming', to: "voice#incoming"
 
-  get '/voice', to: "voice#index"
-
   resources :settings
 
   
