@@ -1,11 +1,15 @@
-<br><br><%= link_to "Edit Settings", edit_setting_path(current_user.setting.id), method: :get %>
+<br><br>
+
+<% if current_user.setting != nil %>
+  <%= link_to "Edit Settings", edit_setting_path(current_user.setting.id), method: :get %>
+<% else %>
+  <%= link_to "Edit Settings", new_setting_path, method: :get %>
+<% end %>
 
 <br><br>
-Message: <%= current_user.setting.message %>
+Message: <%= @message %>
 <br><br>
-Recipient: <%= current_user.setting.recipient %>
+Recipient: <%= @recipient %>
 <br><br>
 
 Autounlock: <%= @status %>
-
-
