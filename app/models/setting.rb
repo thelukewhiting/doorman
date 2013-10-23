@@ -4,7 +4,8 @@ class Setting < ActiveRecord::Base
 
    attr_accessible :user_id, :autounlock
 
-   validates :autounlock, presence: true
+   validates :autounlock, :inclusion => { :in => [true, false] }
+
    validates :user_id, presence: true, uniqueness: true
 
 end

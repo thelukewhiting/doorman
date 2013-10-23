@@ -1,4 +1,5 @@
 Doorman::Application.routes.draw do
+  
   devise_for :users
 
   get "welcome/index"
@@ -9,4 +10,7 @@ Doorman::Application.routes.draw do
 
   get '/voice', to: "voice#index"
 
+  resources :settings
+
+  
 end

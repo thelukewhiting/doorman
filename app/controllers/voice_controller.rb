@@ -1,16 +1,17 @@
 class VoiceController < ApplicationController
 
-  def index
-    
-    @newsetting = Setting.create(user_id: current_user.id, autounlock: true)
-    @allsettings = Setting.all
-
-  end
-
   def incoming
+
     @recipient = "+18286066498"
+    @another_recipient = "+18285055600"
     @message = "The front gate was unlocked."
-    @autounlock = current_user.setting.autounlock
+    
+    #AccountSid is passed in as one of the parameters in the Twilio GET request.
+    #We'll use this to look up the appropriate user and their settings
+
+    user = User.find_by_account_sid(params[:AccountSid])
+
+    @autounlock = user.setting.autounlock
 
     if @autounlock
 
@@ -25,12 +26,3 @@ class VoiceController < ApplicationController
   end
 
 end
-
-
-
-
-
-
-
-
-

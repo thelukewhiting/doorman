@@ -1,0 +1,11 @@
+<br>
+
+<br>
+
+Auto-unlock is currently <%= @status %>.
+
+<br>
+
+<br><%= link_to "Enable Autounlock", setting_path(current_user.id, :autounlock => true), method: :put %> |
+<%= link_to "Disable Autounlock", setting_path(current_user.id, :autounlock => false), method: :put %>
+
