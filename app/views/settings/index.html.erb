@@ -1,9 +1,9 @@
 <br><br>
 
 <% if current_user.setting != nil %>
-  <%= link_to "Edit Settings", edit_setting_path(current_user.setting.id), method: :get %>
+  <%= link_to "Settings", edit_setting_path(current_user.setting.id) %>
 <% else %>
-  <%= link_to "Edit Settings", new_setting_path, method: :get %>
+  <%= link_to "Settings", new_setting_path %>
 <% end %>
 
 <br><br>
