@@ -23,9 +23,12 @@ class SettingsController < ApplicationController
       @status = "Not set"
 
     end
+
   end
 
   def new 
+
+    @setting = Setting.new
 
   end
 
@@ -36,23 +39,18 @@ class SettingsController < ApplicationController
   end
 
 
-  def create
+  def create    
 
     newsetting = Setting.new
+    
     newsetting.user_id = current_user.id
-    newsetting.message = params[:message] 
-    
+    newsetting.message = params[:setting][:message] 
+    newsetting.autounlock = params[:setting][:autounlock]
     # Uses phony_rails to normalize to the e164 format before saving
-    newsetting.recipient = params[:recipient].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
+    newsetting.recipient = params[:setting][:recipient].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
       
-      if(params.has_key?(:autounlock))
-        newsetting.autounlock = true
-      else
-        newsetting.autounlock = false
-      end
-
     newsetting.save
-    
+  
     redirect_to settings_path
 
   end

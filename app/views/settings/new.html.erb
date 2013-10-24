@@ -1,11 +1,24 @@
-<br><br><b>Settings</b><br><br>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Settings</h3>
+  </div>
+  <div class="panel-body">
 
-<%= form_tag(settings_path, method: "post") do %>
-  <%= label_tag(:message, "Message:") %>
-  <%= text_field_tag(:message) %><br><br>
-  <%= label_tag(:recipient, "Recipient:") %>
-  <%= text_field_tag(:recipient) %><br><br>
-  <%= check_box_tag(:autounlock) %>
-  <%= label_tag(:autounlock, "Autounlock?") %><br><br>
-  <%= submit_tag("Save") %>
-<% end %>
+  <%= form_for @setting do  |f|  %>
+    <div class="form-group">  
+      <%= f.label :message %>
+      <%= f.text_field :message, :autofocus => true, :class => "form-control", :placeholder => "Message" %></div>
+    
+    <div class="form-group">  
+      <%= f.label :recipient %>
+      <%= f.text_field :recipient, :class => "form-control", :placeholder => "Recipient" %></div>
+    
+    <div class="checkbox">  
+      <%= f.label :autounlock %>
+      <%= f.check_box :autounlock %></div>
+      
+    <div><%= f.submit "Save", :class => "btn btn-primary" %></div>
+  
+  <% end %>
+</div>
+</div>
