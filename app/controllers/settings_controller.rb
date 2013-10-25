@@ -29,7 +29,7 @@ class SettingsController < ApplicationController
       
     newsetting.save
 
-    redirect_to settings_path
+    redirect_to dashboard_path
 
   end
 
@@ -43,7 +43,7 @@ class SettingsController < ApplicationController
 
     editsetting.update_attributes(params[:setting])
 
-    redirect_to settings_path
+    redirect_to dashboard_path
 
   end
 
