@@ -13,14 +13,16 @@
  *= require_tree .
  */
 
- .logo {
-  
+ html {
+  border-top: solid 3px #428bca;
+  border-top-width: 3px;
+  border-top-style: solid;
+}
+
+ .logo {  
   font-family: 'Coustard', serif;
- 
- }
+}
 
  .logolink {
-
   text-decoration: none !important;
-
  }
