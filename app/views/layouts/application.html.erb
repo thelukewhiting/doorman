@@ -4,6 +4,7 @@
   <title>Doorman</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= stylesheet_link_tag    "jumbotron-narrow", :media => "all" %>
+  <link href='https://fonts.googleapis.com/css?family=Coustard' rel='stylesheet' type='text/css'>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -16,6 +17,8 @@
          
     <% if user_signed_in? %>
       
+      <li><%= link_to "Dashboard", dashboard_path %></li>
+
       <li><%= link_to "Profile", edit_user_registration_path %></li>     
     
       <% if current_user.setting != nil %>
@@ -29,20 +32,25 @@
       <li class="active"><%= link_to "Login", new_user_session_path %></li>
     <% end %>
   </ul>
-  <h3 class="text-muted"><span class="glyphicon glyphicon-lock"></span> Doorman</h3>
+  <h3><span class="logo"><a href="/" class="logolink"><span class="glyphicon glyphicon-lock"></span> Doorman</span></h3></a>
 </div>
 
+<% if notice.present? || alert.present? %>
+<div class="alert alert-dismissable alert-warning">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
   <%= notice %>
   <%= alert %>
+</div>
+<% end %>
 
 <%= yield %>
 
   <div class="footer"> 
     
     <% if user_signed_in? %>
-      <p>logged in as <strong><%= link_to current_user.email, edit_user_registration_path %></strong></p>
+      <p>logged in as <strong><%= link_to current_user.email, edit_user_registration_path %></strong> | &copy;2013 Luke Whiting</p>
     <% else %>
-      <p><%= link_to "Login", new_user_session_path %></p>
+      <p>not logged in | &copy;2013 Luke Whiting</p>
     <% end %>       
     
   </div>

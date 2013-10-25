@@ -10,7 +10,7 @@
       <div class="form-group"><%= f.label :email %><br />
       <%= f.email_field :email, :autofocus => true, :class => "form-control", :placeholder => "Email Address" %></div>
 
-      <div class="form-group"><%= f.label :account_sid %><br />
+      <div class="form-group"><%= f.label(:account_sid, 'Account SID') %><br />
       <%= f.text_field :account_sid, :class => "form-control", :placeholder => "Twilio Account SID" %></div>
 
       <div class="form-group"><%= f.label :password %><br />

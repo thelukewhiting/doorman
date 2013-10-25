@@ -1,6 +1,6 @@
 Doorman::Application.routes.draw do
   
-  get "dashboard/index"
+   get "dashboard/index"
 
   devise_for :users
 
@@ -13,5 +13,7 @@ Doorman::Application.routes.draw do
   get '/voice/incoming', to: 'voice#incoming'
 
   resources :settings
+
+  match '*path' => redirect('/')
   
 end
