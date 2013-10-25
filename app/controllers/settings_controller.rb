@@ -20,10 +20,12 @@ class SettingsController < ApplicationController
     newsetting = Setting.new
     
     newsetting.user_id = current_user.id
+    newsetting.unlock_digits = params[:setting][:unlock_digits]
     newsetting.message = params[:setting][:message] 
-    newsetting.autounlock = params[:setting][:autounlock]
+    
     # Uses phony_rails to normalize to the e164 format before saving
     newsetting.recipient = params[:setting][:recipient].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
+    newsetting.autounlock = params[:setting][:autounlock]
       
     newsetting.save
 

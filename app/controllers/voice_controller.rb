@@ -7,6 +7,8 @@ class VoiceController < ApplicationController
 
     user = User.find_by_account_sid(params[:AccountSid])
 
+    @unlock_digits = user.setting.unlock_digits
+
     @recipient = user.setting.recipient
 
     @message = user.setting.message

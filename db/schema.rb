@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131024002217) do
+ActiveRecord::Schema.define(:version => 20131025025226) do
 
   create_table "settings", :force => true do |t|
     t.integer  "user_id"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20131024002217) do
     t.datetime "updated_at",                       :null => false
     t.string   "message"
     t.string   "recipient"
-    t.integer  "unlock_digits"
+    t.string   "unlock_digits"
   end
 
   create_table "users", :force => true do |t|
