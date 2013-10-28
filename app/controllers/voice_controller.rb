@@ -1,5 +1,8 @@
 class VoiceController < ApplicationController
 
+before_filter :validate_params
+
+
   def incoming
 
     #AccountSid is passed in as one of the parameters in the Twilio GET request.
@@ -25,6 +28,10 @@ class VoiceController < ApplicationController
 
     end
 
+  end
+
+  def validate_params
+    redirect_to dashboard_path unless params[:AccountSid]
   end
 
 end
