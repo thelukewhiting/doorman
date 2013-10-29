@@ -29,10 +29,11 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :development do
+group :test, :development do
   gem 'pry'
   gem 'rspec-rails'
   gem 'nyan-cat-formatter'
+  gem 'konacha'
 end
 
 
