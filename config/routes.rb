@@ -1,6 +1,6 @@
 Doorman::Application.routes.draw do
   
-   get "dashboard/index"
+  get "dashboard/index"
 
   devise_for :users
 

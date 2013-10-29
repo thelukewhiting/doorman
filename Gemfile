@@ -31,6 +31,8 @@ end
 
 group :development do
   gem 'pry'
+  gem 'rspec-rails'
+  gem 'nyan-cat-formatter'
 end
 
 

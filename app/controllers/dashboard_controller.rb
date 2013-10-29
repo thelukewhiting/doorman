@@ -3,27 +3,22 @@ class DashboardController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    if current_user.setting != nil
+    
+    user = current_user.setting
 
-      @unlock_digits = current_user.setting.unlock_digits
-      
-      @message = current_user.setting.message
+    if user
+      @unlock_digits = user.unlock_digits
+      @message = user.message
+      @recipient = user.recipient
 
-      @recipient = current_user.setting.recipient
-
-      if current_user.setting.autounlock
-        @status = "Enabled"
-      else
-        @status = "Disabled"
+      if user.autounlock ? @status = "Enabled" : @status = "Disabled"
       end
 
-    else  
-
+    else
       @unlock_digits = "Unlock digits not set"
       @message = "Unlock message not set"
       @recipient = "SMS recipient not set"
       @status = "Autounlock not set"
-
     end
 
   end

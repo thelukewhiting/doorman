@@ -10,6 +10,7 @@ test:
   encoding: unicode
   database: doorman_test
   pool: 5
+  host: localhost
 
 production:
   adapter: postgresql
