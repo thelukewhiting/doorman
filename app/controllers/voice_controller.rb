@@ -2,29 +2,30 @@ class VoiceController < ApplicationController
 
 before_filter :validate_params
 
-
   def incoming
 
     #AccountSid is passed in as one of the parameters in the Twilio GET request.
-    #We'll use this to look up the appropriate user and their settings
+    #We'll use this to look up the appropriate settings
 
-    user = User.find_by_account_sid(params[:AccountSid])
+    setting = Setting.find_by_account_sid(params[:AccountSid])
 
-    @unlock_digits = user.setting.unlock_digits
+    @unlock_digits = setting.unlock_digits
 
-    @recipient = user.setting.recipient
+    @recipient = setting.recipient
 
-    @message = user.setting.message
+    @message = setting.message
 
-    @autounlock = user.setting.autounlock   
+    @autounlock = setting.autounlock
 
     if @autounlock
 
-      render action: "unlock.xml.builder", :layout => false
+      # render action: "unlock.xml.builder", :layout => false
+      render 'unlock.xml.erb', content_type: 'text/xml', layout: false
 
-    else 
+    else
 
-      render action: "forward.xml.builder", :layout => false
+      # render action: "forward.xml.builder", :layout => false
+      render 'forward.xml.erb', content_type: 'text/xml', layout: false
 
     end
 

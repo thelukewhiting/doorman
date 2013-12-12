@@ -13,5 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-
 //= require_tree .
+//= require_self
+
+$(function(){
+  console.log(document.getElementById('flash'));
+ });

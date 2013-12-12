@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  
-  has_one :setting
+
+  has_one :setting, :dependent => :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -8,9 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :account_sid
+  attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
-
-  validates :account_sid, length: { is: 34 }, uniqueness: true 
 
 end

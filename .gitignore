@@ -10,6 +10,12 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 
+# Ignore ENV variables: keys and secret authentications
+.env
+
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore Redis dump file
+dump.rdb

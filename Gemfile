@@ -9,6 +9,7 @@ gem 'pg'
 
 gem 'bootstrap-sass-rails'
 gem 'twilio-ruby'
+gem 'dotenv-rails'
 
 # authentication
 gem 'devise'

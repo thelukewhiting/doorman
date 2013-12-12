@@ -34,13 +34,13 @@
   <h3><span class="logo"><a href="/" class="logolink"><span class="glyphicon glyphicon-lock"></span> Doorman</span></h3></a>
 </div>
 
-<% if notice.present? || alert.present? %>
-<div class="alert alert-dismissable alert-warning">
+
+<div class="alert alert-warning fade in">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <%= notice %>
-  <%= alert %>
+  <div id="flash"><%= notice %>
+  <%= alert %></div>
 </div>
-<% end %>
+
 
 <%= yield %>
 
