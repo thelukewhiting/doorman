@@ -4,6 +4,12 @@
 
 $ ->
 
+  # $(window).on "beforeunload", ->
+    # "Are you sure you want to leave? Your settings will be lost!"
+
+  # $(window).on "beforeunload", ->
+    # "Your settings could be lost!"
+
   createTwilioAccount = ->
 
     $.get '/settings/create_twilio_account', (data) ->

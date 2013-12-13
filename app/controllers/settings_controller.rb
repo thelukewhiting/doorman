@@ -4,7 +4,6 @@ class SettingsController < ApplicationController
 
   def new
 
-
   end
 
   def edit

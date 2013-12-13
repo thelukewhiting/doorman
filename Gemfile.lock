@@ -148,6 +148,8 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    rufus-scheduler (3.0.3)
+      tzinfo
     sass (3.2.12)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -196,6 +198,7 @@ DEPENDENCIES
   pry
   rails (= 3.2.14)
   rspec-rails
+  rufus-scheduler
   sass-rails (~> 3.2.3)
   twilio-ruby
   uglifier (>= 1.0.3)
