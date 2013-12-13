@@ -7,10 +7,6 @@
   <%= form_for @setting do  |f|  %>
 
     <div class="form-group">
-      <p><strong>Twilio Account SID:</strong> 34-character string used to authenticate your account</p>
-      <%= f.text_field :account_sid, :autofocus => true, :class => "form-control", :placeholder => "Account SID" %></div>
-
-    <div class="form-group">
       <p><strong>Unlock Digit(s):</strong> commonly '0' or '9'. Use 'w' for pauses</p>
       <%= f.text_field :unlock_digits, :class => "form-control", :placeholder => "Unlock Digits" %></div>
 

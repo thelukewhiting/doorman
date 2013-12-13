@@ -15,7 +15,3 @@
 //= require twitter/bootstrap
 //= require_tree .
 //= require_self
-
-$(function(){
-  console.log(document.getElementById('flash'));
- });

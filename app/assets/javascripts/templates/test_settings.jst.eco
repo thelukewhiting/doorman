@@ -1,0 +1,10 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Test Your Setup</h3>
+  </div>
+  <div class="panel-body">
+    <label>Doorman will call the phone you specified earlier and send a text message to test your settings.</label>
+    <button type="button" class="btn btn-primary btn-lg test-settings">Test Your Settings</button>
+    <a class="btn btn-primary btn-lg finish-settings" href="/dashboard">Finish</a>
+  </div>
+</div>

@@ -16,18 +16,26 @@ class SettingsController < ApplicationController
 
   def create
 
-    setting = Setting.where(user_id: current_user.id)
+    # binding.pry
 
-    newsetting.unlock_digits = params[:setting][:unlock_digits]
-    newsetting.message = params[:setting][:message]
+    # setting = Setting.where(user_id: current_user.id)
 
-    # Uses phony_rails to normalize to the e164 format before saving
-    newsetting.recipient = params[:setting][:recipient].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
-    newsetting.autounlock = params[:setting][:autounlock]
+    # if params[:autounlock] == 'on'
+      # autounlock = true
+    # else
+      # autounlock = false
+    # end
 
-    newsetting.save
+    # # Uses phony_rails to normalize to the e164 format before saving
+    # formatted_recipient = params[:recipient].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
 
-    redirect_to dashboard_path
+    # setting[0].update_attributes(unlock_digits: params[:unlock_digits], message: params[:message], recipient: formatted_recipient, autounlock: autounlock )
+
+    success = true
+
+    respond_to do |format|
+      format.json {render :json => success}
+    end
 
   end
 
@@ -47,19 +55,21 @@ class SettingsController < ApplicationController
 
   def create_twilio_account
 
-    parent_account_sid = ENV['TWILIO_ACCOUNT_SID']
-    parent_auth_token = ENV['TWILIO_AUTH_TOKEN']
+    # parent_account_sid = ENV['TWILIO_ACCOUNT_SID']
+    # parent_auth_token = ENV['TWILIO_AUTH_TOKEN']
 
-    client = Twilio::REST::Client.new(parent_account_sid, parent_auth_token)
+    sleep 1
 
-    subaccount = client.accounts.create({:FriendlyName => current_user.email})
+    # client = Twilio::REST::Client.new(parent_account_sid, parent_auth_token)
 
-    new_setting = Setting.new
-    new_setting.user_id = current_user.id
-    new_setting.account_sid = subaccount.sid
-    new_setting.twilio_auth_token = subaccount.auth_token
+    # subaccount = client.accounts.create({:FriendlyName => current_user.email, :VoiceURL => 'http://doormanapp.herokuapp.com/voice/incoming', :VoiceMethod => 'GET'})
 
-    new_setting.save
+    # new_setting = Setting.new
+    # new_setting.user_id = current_user.id
+    # new_setting.account_sid = subaccount.sid
+    # new_setting.twilio_auth_token = subaccount.auth_token
+
+    # new_setting.save
 
     success = true
 
@@ -73,9 +83,16 @@ class SettingsController < ApplicationController
 
     area_code = params[:area_code]
 
-    setting = Setting.where(user_id: current_user.id)
+    # setting = Setting.where(user_id: current_user.id)
 
-    sub_account_client = Twilio::REST::Client.new(setting.account_sid, setting.auth_token)
+    # account_sid = setting[0].account_sid
+    # twilio_auth_token = setting[0].twilio_auth_token
+
+    # Using primary account SID & auth token for testing (comment out for production)
+    account_sid = ENV['TWILIO_ACCOUNT_SID']
+    twilio_auth_token = ENV['TWILIO_AUTH_TOKEN']
+
+    sub_account_client = Twilio::REST::Client.new(account_sid, twilio_auth_token)
     subaccount = sub_account_client.account
     numbers = subaccount.available_phone_numbers.get('US').local.list({:area_code => area_code})
 
@@ -95,15 +112,45 @@ class SettingsController < ApplicationController
 
     twilio_number = params[:phone_number]
 
-    setting = Setting.where(user_id: current_user.id)
-    subaccount_client = Twilio::REST::Client.new(setting.account_sid, setting.auth_token)
-    subaccount = sub_account_client.account
+    sleep 0.5
 
-    subaccount.incoming_phone_numbers.create(:phone_number => twilio_number)
+    # setting = Setting.where(user_id: current_user.id)
+
+    # account_sid = setting[0].account_sid
+    # twilio_auth_token = setting[0].twilio_auth_token
+
+    # sub_account_client = Twilio::REST::Client.new(account_sid, twilio_auth_token)
+    # subaccount = sub_account_client.account
+
+    # subaccount.incoming_phone_numbers.create(:phone_number => twilio_number)
+
+    # setting = Setting.where(user_id: current_user.id)
+    # setting[0].update_attributes(twilio_number: twilio_number)
+
+    success_number = {twilio_number: twilio_number}
+
+    respond_to do |format|
+      format.json {render :json => success_number}
+    end
+
+  end
+
+  def test_settings
 
     setting = Setting.where(user_id: current_user.id)
-    setting.twilio_number = twilio_number
-    setting.save
+
+    account_sid = setting[0].account_sid
+    twilio_auth_token = setting[0].twilio_auth_token
+    twilio_number = setting[0].twilio_number
+    recipient = setting[0].recipient
+
+    twilio_client = Twilio::REST::Client.new account_sid, twilio_auth_token
+
+    call = twilio_client.account.calls.create(
+      :from => twilio_number,
+      :to => recipient,
+      :url => 'https://lukewhiting.fwd.wf/voice/settings_test',
+    )
 
     success = true
 

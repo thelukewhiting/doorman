@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Say>Hi, this is the Doorman App, calling to test your settings. Your unlock digits are <%= @unlock_digits %>.</Say>
+    <Say>Now playing unlock digits.</Say>
+    <Play digits="<%= @unlock_digits%>"></Play>
+    <Sms to="<%=@recipient %>"><%= @message %></Sms>
+    <Say>I just sent a text message to your recipient.</Say>
+    <Say>Goodbye!</Say>
+</Response>

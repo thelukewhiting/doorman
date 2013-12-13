@@ -1,6 +1,6 @@
 class VoiceController < ApplicationController
 
-before_filter :validate_params
+# before_filter :validate_params, except: [:settings_test]
 
   def incoming
 
@@ -19,12 +19,10 @@ before_filter :validate_params
 
     if @autounlock
 
-      # render action: "unlock.xml.builder", :layout => false
       render 'unlock.xml.erb', content_type: 'text/xml', layout: false
 
     else
 
-      # render action: "forward.xml.builder", :layout => false
       render 'forward.xml.erb', content_type: 'text/xml', layout: false
 
     end
@@ -33,6 +31,24 @@ before_filter :validate_params
 
   def validate_params
     redirect_to dashboard_path unless params[:AccountSid]
+  end
+
+  def settings_test
+
+    setting = Setting.find_by_account_sid(params[:AccountSid])
+    # setting = Setting.where(user_id: current_user.id)
+    # setting = Setting.where(user_id: 10)
+
+    @unlock_digits = setting.unlock_digits
+
+    @recipient = setting.recipient
+
+    @message = setting.message
+
+    @autounlock = setting.autounlock
+
+    render 'test.xml.erb', content_type: 'text/xml', layout: false
+
   end
 
 end

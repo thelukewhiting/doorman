@@ -10,6 +10,7 @@ gem 'pg'
 gem 'bootstrap-sass-rails'
 gem 'twilio-ruby'
 gem 'dotenv-rails'
+gem 'eco'
 
 # authentication
 gem 'devise'
