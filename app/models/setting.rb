@@ -2,7 +2,7 @@ class Setting < ActiveRecord::Base
 
    belongs_to :user
 
-   attr_accessible :user_id, :autounlock, :message, :recipient, :unlock_digits, :account_sid, :twilio_number
+   attr_accessible :user_id, :autounlock, :message, :recipient, :unlock_digits, :account_sid, :twilio_number, :countdown
 
    # validates :user_id, presence: true, uniqueness: true
 

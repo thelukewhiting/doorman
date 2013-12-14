@@ -16,7 +16,10 @@ Doorman::Application.routes.draw do
   get '/settings/fetch_twilio_number', to: 'settings#fetch_twilio_number'
   get '/settings/buy_twilio_number', to: 'settings#buy_twilio_number'
   get '/settings/test_settings', to: 'settings#test_settings'
+  get '/settings/start_timer', to: 'settings#start_timer'
+
   post '/voice/settings_test', to: 'voice#settings_test'
+
 
   resources :settings
 

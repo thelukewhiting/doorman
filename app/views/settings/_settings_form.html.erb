@@ -18,11 +18,6 @@
       <p><strong>Recipient:</strong> message texted to this phone number when door is unlocked</p>
       <%= f.text_field :recipient, :class => "form-control", :placeholder => "Recipient" %></div>
 
-    <div class="checkbox">
-
-      <%= f.label (:autounlock),'Auto-unlock? (if checked, Doorman will unlock your gate automatically)' %>
-      <%= f.check_box :autounlock %></div>
-
     <div><%= f.submit "Save", :class => "btn btn-primary" %></div>
 
   <% end %>

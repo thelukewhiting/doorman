@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Doorman</title>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= stylesheet_link_tag    "jumbotron-narrow", :media => "all" %>
   <link href='https://fonts.googleapis.com/css?family=Coustard' rel='stylesheet' type='text/css'>
@@ -11,35 +12,35 @@
 <body>
 
 <div class="container">
-<div class="header">
-  <ul class="nav nav-pills pull-right">
+  <div class="header">
+    <ul class="nav nav-pills pull-right">
 
-    <% if user_signed_in? %>
+      <% if user_signed_in? %>
 
-      <li><%= link_to "Dashboard", dashboard_path %></li>
+        <li><%= link_to "Dashboard", dashboard_path %></li>
 
-      <li><%= link_to "Profile", edit_user_registration_path %></li>
+        <li><%= link_to "Profile", edit_user_registration_path %></li>
 
-      <% if current_user.setting != nil %>
-        <li><%= link_to "Settings", edit_setting_path(current_user.setting.id) %></li>
+        <% if current_user.setting != nil %>
+          <li><%= link_to "Settings", edit_setting_path(current_user.setting.id) %></li>
+        <% else %>
+          <li><%= link_to "Settings", new_setting_path %></li>
+        <% end %>
+        <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
       <% else %>
-        <li><%= link_to "Settings", new_setting_path %></li>
+        <li><%= link_to "Sign Up", new_user_registration_path %></li>
+        <li class="active"><%= link_to "Login", new_user_session_path %></li>
       <% end %>
-      <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-    <% else %>
-      <li><%= link_to "Sign Up", new_user_registration_path %></li>
-      <li class="active"><%= link_to "Login", new_user_session_path %></li>
-    <% end %>
-  </ul>
-  <h3><span class="logo"><a href="/" class="logolink"><span class="glyphicon glyphicon-lock"></span> Doorman</span></h3></a>
-</div>
+    </ul>
+    <h3><span class="logo"><a href="/" class="logolink"><span class="glyphicon glyphicon-lock"></span> Doorman</span></h3></a>
+  </div>
 
 
-<div class="alert alert-warning fade in">
+<!-- <div class="alert alert-warning fade in">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
   <div id="flash"><%= notice %>
   <%= alert %></div>
-</div>
+</div> -->
 
 
 <%= yield %>

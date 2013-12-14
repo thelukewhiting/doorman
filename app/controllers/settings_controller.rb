@@ -4,6 +4,7 @@ class SettingsController < ApplicationController
 
   def new
 
+
   end
 
   def edit
@@ -156,6 +157,47 @@ class SettingsController < ApplicationController
     respond_to do |format|
       format.json {render :json => success}
     end
+
+  end
+
+  def start_timer
+
+    setting = Setting.where(user_id: current_user.id)
+    setting[0].update_attributes(mode: "autounlock")
+
+    if setting[0].countdown == nil
+
+      scheduler = Rufus::Scheduler.new
+
+      job_id =
+        scheduler.in '60s' do
+          setting[0].update_attributes(mode: "manual")
+          setting[0].update_attributes(countdown: nil)
+        end
+
+      job = scheduler.job(job_id)
+
+      setting[0].update_attributes(countdown: job.time.utc)
+
+      countdown = {countdown: (job.time.utc - Time.now.utc).to_i}
+
+      respond_to do |format|
+        format.json {render :json => countdown}
+      end
+
+    end
+
+    status = false
+
+    respond_to do |format|
+      format.json {render :json => status}
+    end
+
+    # success_number = {twilio_number: twilio_number}
+
+    # respond_to do |format|
+      # format.json {render :json => success_number}
+    # end
 
   end
 

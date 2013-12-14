@@ -11,19 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131211223137) do
+ActiveRecord::Schema.define(:version => 20131214012107) do
 
   create_table "settings", :force => true do |t|
     t.integer  "user_id"
-    t.boolean  "autounlock",        :default => false
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "message"
     t.string   "recipient"
     t.string   "unlock_digits"
     t.string   "account_sid"
     t.string   "twilio_number"
     t.string   "twilio_auth_token"
+    t.string   "countdown"
+    t.string   "mode"
+    t.integer  "pin"
+    t.string   "forward1"
+    t.string   "forward2"
+    t.string   "forward3"
+    t.string   "forward4"
   end
 
   create_table "users", :force => true do |t|

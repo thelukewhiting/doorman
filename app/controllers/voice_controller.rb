@@ -15,16 +15,24 @@ class VoiceController < ApplicationController
 
     @message = setting.message
 
-    @autounlock = setting.autounlock
+    mode = setting.mode
 
-    if @autounlock
+    case mode
 
-      render 'unlock.xml.erb', content_type: 'text/xml', layout: false
+    when 'manual'
+      render 'manual.xml.erb', content_type: 'text/xml', layout: false
 
-    else
+    when 'autounlock'
+      render 'autounlock.xml.erb', content_type: 'text/xml', layout: false
 
+    when 'pinunlock'
+      render 'pinunlock.xml.erb', content_type: 'text/xml', layout: false
+
+    when 'forward'
       render 'forward.xml.erb', content_type: 'text/xml', layout: false
 
+    else
+      render 'manual.xml.erb', content_type: 'text/xml', layout: false
     end
 
   end
@@ -36,16 +44,12 @@ class VoiceController < ApplicationController
   def settings_test
 
     setting = Setting.find_by_account_sid(params[:AccountSid])
-    # setting = Setting.where(user_id: current_user.id)
-    # setting = Setting.where(user_id: 10)
 
     @unlock_digits = setting.unlock_digits
 
     @recipient = setting.recipient
 
     @message = setting.message
-
-    @autounlock = setting.autounlock
 
     render 'test.xml.erb', content_type: 'text/xml', layout: false
 
