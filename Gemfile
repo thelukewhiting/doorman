@@ -6,7 +6,10 @@ gem 'rails', '3.2.14'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem 'rufus-scheduler'
+# gem 'rufus-scheduler'
+gem 'sidekiq'
+gem 'sidekiq-status'
+gem 'sinatra', '>=1.3.0', :require => nil
 
 # gem 'bootstrap-sass-rails'
 gem 'twilio-ruby'

@@ -6,6 +6,6 @@
 
     <h5>Timer will expire in <%= @countdown %></h5>
 
-    <button type='button' class='btn btn-primary start-timer'>Cancel Timer</button>
+    <button type='button' class='btn btn-primary cancel-timer'>Cancel Timer</button>
   </div>
 </div>

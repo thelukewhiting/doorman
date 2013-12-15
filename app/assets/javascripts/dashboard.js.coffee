@@ -26,6 +26,11 @@ $ ->
 
   handle_mode_click 'forward'
 
+  $('body').on 'click', 'button[class="btn btn-primary cancel-timer"]', (event) ->
+    event.preventDefault()
+    $('.col-md-9').empty().append(JST["templates/autounlock"])
+    $.get( '/settings/update_mode', {mode: 'autounlock'})
+
   $('body').on 'click', 'li[class="time"]', (event) ->
     event.preventDefault()
 

@@ -2,7 +2,7 @@ class Setting < ActiveRecord::Base
 
    belongs_to :user
 
-   attr_accessible :user_id, :message, :recipient, :unlock_digits, :account_sid, :twilio_number, :countdown, :mode, :pin, :forward1, :forward2, :forward3, :forward4
+   attr_accessible :user_id, :message, :recipient, :unlock_digits, :account_sid, :twilio_number, :countdown, :mode, :pin, :forward1, :forward2, :forward3, :forward4, :job_id
 
    # validates :user_id, presence: true, uniqueness: true
 

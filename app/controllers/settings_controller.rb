@@ -167,35 +167,47 @@ class SettingsController < ApplicationController
   def start_timer
 
     setting = Setting.where(user_id: current_user.id)
-    setting[0].update_attributes(mode: "autounlock")
-    seconds = params[:seconds].to_s + "s"
+    # setting[0].update_attributes(mode: "autounlock")
+    # seconds = params[:seconds].to_s + "s"
+    seconds = params[:seconds].to_i
 
     status = false
 
     if setting[0].countdown == nil
 
-      scheduler = Rufus::Scheduler.new
+      job_time = Time.now.utc + seconds
 
-      job_id =
-        scheduler.in seconds do
-          setting[0].update_attributes(mode: "manual")
-          setting[0].update_attributes(countdown: nil)
-        end
+      job_id = AutounlockWorker.perform_at(job_time, current_user.id)
 
-      job = scheduler.job(job_id)
+      setting[0].update_attributes(countdown: job_time, job_id: job_id)
 
-      setting[0].update_attributes(countdown: job.time.utc)
-
-      from_time = Time.now.utc
-      to_time = job.time.utc
-
-      countdown = {countdown: (distance_of_time_in_words(from_time, to_time, include_seconds: true))}
+      countdown = {countdown: (distance_of_time_in_words(Time.now.utc, job_time, include_seconds: true))}
 
       status = countdown
 
-      binding.pry
-
     end
+
+    # if setting[0].countdown == nil
+
+    #   @scheduler = Rufus::Scheduler.new
+
+    #   job_id =
+    #     @scheduler.in seconds do
+    #       setting[0].update_attributes(mode: "manual", countdown: nil, job_id: nil)
+    #     end
+
+    #   job = @scheduler.job(job_id)
+
+    #   setting[0].update_attributes(countdown: job.time.utc, job_id: job_id)
+
+    #   from_time = Time.now.utc
+    #   to_time = job.time.utc
+
+    #   countdown = {countdown: (distance_of_time_in_words(from_time, to_time, include_seconds: true))}
+
+    #   status = countdown
+
+    # end
 
     respond_to do |format|
       format.json {render :json => status}
@@ -206,7 +218,15 @@ class SettingsController < ApplicationController
   def update_mode
 
     setting = Setting.where(user_id: current_user.id)
+
     setting[0].update_attributes(mode: params[:mode])
+
+    if setting[0].job_id != nil && setting[0].countdown != nil
+
+      setting[0].update_attributes(countdown: nil, job_id: nil, mode: params[:mode])
+    else
+      setting[0].update_attributes(mode: params[:mode])
+    end
 
     success = true
 
