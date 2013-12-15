@@ -8,7 +8,7 @@ gem 'rails', '3.2.14'
 gem 'pg'
 gem 'rufus-scheduler'
 
-gem 'bootstrap-sass-rails'
+# gem 'bootstrap-sass-rails'
 gem 'twilio-ruby'
 gem 'dotenv-rails'
 gem 'eco'

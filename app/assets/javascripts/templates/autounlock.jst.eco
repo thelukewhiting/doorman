@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Auto Unlock Mode</h3>
+  </div>
+  <div class="panel-body">
+    <p>Your gate will automatically unlock while enabled. Set an optional timer to disable auto unlock (and revert to manual mode) when the timer expires.</p>
+    <div class="btn-group">
+      <button type="button" class="btn btn-default time-dropdown">Select a time...</button>
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li class="time" data-seconds="30"><a href="#">30 seconds</a></li>
+        <li class="time" data-seconds="900"><a href="#">15 minutes</a></li>
+        <li class="time" data-seconds="1800"><a href="#">30 minutes</a></li>
+        <li class="time" data-seconds="2700"><a href="#">45 minutes</a></li>
+        <li class="time" data-seconds="3600"><a href="#">60 minutes</a></li>
+        <li class="time" data-seconds="5400"><a href="#">90 minutes</a></li>
+        <li class="time" data-seconds="7200"><a href="#">2 hours</a></li>
+        <li class="time" data-seconds="10800"><a href="#">3 hours</a></li>
+        <li class="time" data-seconds="14400"><a href="#">4 hours</a></li>
+        <li class="time" data-seconds="18000"><a href="#">5 hours</a></li>
+        <li class="time" data-seconds="21600"><a href="#">6 hours</a></li>
+        <li class="time" data-seconds="25200"><a href="#">7 hours</a></li>
+        <li class="time" data-seconds="28800"><a href="#">8 hours</a></li>
+        <li class="time" data-seconds="32400"><a href="#">9 hours</a></li>
+        <li class="time" data-seconds="36000"><a href="#">10 hours</a></li>
+        <li class="time" data-seconds="39600"><a href="#">11 hours</a></li>
+        <li class="time" data-seconds="43200"><a href="#">12 hours</a></li>
+      </ul>
+    </div>
+      <button type='button' class='btn btn-primary start-timer'>Start Timer</button>
+  </div>
+</div>

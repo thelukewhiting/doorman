@@ -2,6 +2,10 @@ class SettingsController < ApplicationController
 
   before_filter :authenticate_user!
 
+  require 'action_view'
+
+  include ActionView::Helpers::DateHelper
+
   def new
 
 
@@ -164,13 +168,16 @@ class SettingsController < ApplicationController
 
     setting = Setting.where(user_id: current_user.id)
     setting[0].update_attributes(mode: "autounlock")
+    seconds = params[:seconds].to_s + "s"
+
+    status = false
 
     if setting[0].countdown == nil
 
       scheduler = Rufus::Scheduler.new
 
       job_id =
-        scheduler.in '60s' do
+        scheduler.in seconds do
           setting[0].update_attributes(mode: "manual")
           setting[0].update_attributes(countdown: nil)
         end
@@ -179,26 +186,33 @@ class SettingsController < ApplicationController
 
       setting[0].update_attributes(countdown: job.time.utc)
 
-      countdown = {countdown: (job.time.utc - Time.now.utc).to_i}
+      from_time = Time.now.utc
+      to_time = job.time.utc
 
-      respond_to do |format|
-        format.json {render :json => countdown}
-      end
+      countdown = {countdown: (distance_of_time_in_words(from_time, to_time, include_seconds: true))}
+
+      status = countdown
+
+      binding.pry
 
     end
-
-    status = false
 
     respond_to do |format|
       format.json {render :json => status}
     end
 
-    # success_number = {twilio_number: twilio_number}
+  end
 
-    # respond_to do |format|
-      # format.json {render :json => success_number}
-    # end
+  def update_mode
 
+    setting = Setting.where(user_id: current_user.id)
+    setting[0].update_attributes(mode: params[:mode])
+
+    success = true
+
+    respond_to do |format|
+      format.json {render :json => success}
+    end
   end
 
 end

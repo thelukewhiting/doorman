@@ -17,6 +17,7 @@ Doorman::Application.routes.draw do
   get '/settings/buy_twilio_number', to: 'settings#buy_twilio_number'
   get '/settings/test_settings', to: 'settings#test_settings'
   get '/settings/start_timer', to: 'settings#start_timer'
+  get '/settings/update_mode', to: 'settings#update_mode'
 
   post '/voice/settings_test', to: 'voice#settings_test'
 

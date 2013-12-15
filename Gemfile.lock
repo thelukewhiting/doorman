@@ -31,9 +31,6 @@ GEM
     arel (3.0.2)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
-    bootstrap-sass-rails (3.0.0.3)
-      railties (>= 3.1.0)
-      sass-rails (>= 3.1.0)
     builder (3.0.4)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -185,7 +182,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass-rails
   coffee-rails (~> 3.2.1)
   devise
   dotenv-rails

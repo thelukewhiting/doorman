@@ -2,6 +2,7 @@ class VoiceController < ApplicationController
 
 # before_filter :validate_params, except: [:settings_test]
 
+
   def incoming
 
     #AccountSid is passed in as one of the parameters in the Twilio GET request.
