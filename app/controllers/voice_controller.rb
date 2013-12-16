@@ -2,7 +2,6 @@ class VoiceController < ApplicationController
 
 # before_filter :validate_params, except: [:settings_test]
 
-
   def incoming
 
     #AccountSid is passed in as one of the parameters in the Twilio GET request.
@@ -14,26 +13,43 @@ class VoiceController < ApplicationController
 
     @recipient = setting.recipient
 
-    @message = setting.message
+    if params[:Digits]
+      @pin = setting.pin
 
-    mode = setting.mode
-
-    case mode
-
-    when 'manual'
-      render 'manual.xml.erb', content_type: 'text/xml', layout: false
-
-    when 'autounlock'
-      render 'autounlock.xml.erb', content_type: 'text/xml', layout: false
-
-    when 'pinunlock'
-      render 'pinunlock.xml.erb', content_type: 'text/xml', layout: false
-
-    when 'forward'
-      render 'forward.xml.erb', content_type: 'text/xml', layout: false
+      if params[:Digits].to_i == @pin
+        render 'autounlock.xml.erb', content_type: 'text/xml', layout: false
+      else
+        render 'pinunlock_error.xml.erb', content_type: 'text/xml', layout: false
+      end
 
     else
-      render 'manual.xml.erb', content_type: 'text/xml', layout: false
+
+      mode = setting.mode
+
+      case mode
+
+      when 'manual'
+        render 'manual.xml.erb', content_type: 'text/xml', layout: false
+
+      when 'autounlock'
+        render 'autounlock.xml.erb', content_type: 'text/xml', layout: false
+
+      when 'pinunlock'
+        render 'pinunlock.xml.erb', content_type: 'text/xml', layout: false
+
+      when 'forward'
+        @forward_nums = []
+        @forward_nums << setting.forward1
+        @forward_nums << setting.forward2
+        @forward_nums << setting.forward3
+        @forward_nums << setting.forward4
+
+        render 'forward.xml.erb', content_type: 'text/xml', layout: false
+
+      else
+        render 'manual.xml.erb', content_type: 'text/xml', layout: false
+      end
+
     end
 
   end
@@ -49,8 +65,6 @@ class VoiceController < ApplicationController
     @unlock_digits = setting.unlock_digits
 
     @recipient = setting.recipient
-
-    @message = setting.message
 
     render 'test.xml.erb', content_type: 'text/xml', layout: false
 

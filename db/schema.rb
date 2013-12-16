@@ -11,13 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131215185544) do
+ActiveRecord::Schema.define(:version => 20131216223305) do
 
   create_table "settings", :force => true do |t|
     t.integer  "user_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-    t.string   "message"
     t.string   "recipient"
     t.string   "unlock_digits"
     t.string   "account_sid"
@@ -31,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20131215185544) do
     t.string   "forward3"
     t.string   "forward4"
     t.string   "job_id"
+    t.boolean  "text_confirmation"
   end
 
   create_table "users", :force => true do |t|

@@ -20,7 +20,7 @@ class SettingsController < ApplicationController
 
   def create
 
-    # binding.pry
+
 
     # setting = Setting.where(user_id: current_user.id)
 
@@ -33,7 +33,7 @@ class SettingsController < ApplicationController
     # # Uses phony_rails to normalize to the e164 format before saving
     # formatted_recipient = params[:recipient].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
 
-    # setting[0].update_attributes(unlock_digits: params[:unlock_digits], message: params[:message], recipient: formatted_recipient, autounlock: autounlock )
+    # setting[0].update_attributes(unlock_digits: params[:unlock_digits], recipient: formatted_recipient, autounlock: autounlock )
 
     success = true
 
@@ -50,6 +50,22 @@ class SettingsController < ApplicationController
 
     # Uses phony_rails to normalize to the e164 format before updating
     params[:setting][:recipient] = params[:setting][:recipient].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
+
+    if params[:setting][:forward1] != ''
+      params[:setting][:forward1] = params[:setting][:forward1].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
+    end
+
+    if params[:setting][:forward2] != ''
+      params[:setting][:forward2] = params[:setting][:forward2].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
+    end
+
+    if params[:setting][:forward3] != ''
+      params[:setting][:forward3] = params[:setting][:forward3].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
+    end
+
+    if params[:setting][:forward4] != ''
+      params[:setting][:forward4] = params[:setting][:forward4].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
+    end
 
     editsetting.update_attributes(params[:setting])
 
@@ -228,10 +244,8 @@ class SettingsController < ApplicationController
       setting[0].update_attributes(mode: params[:mode])
     end
 
-    success = true
-
     respond_to do |format|
-      format.json {render :json => success}
+      format.json {render :json => setting}
     end
   end
 

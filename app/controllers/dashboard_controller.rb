@@ -11,6 +11,8 @@ class DashboardController < ApplicationController
     setting = current_user.setting
 
     if setting.mode == 'manual'
+
+      @recipient = setting.recipient
       render 'manual.html.erb'
 
     elsif setting.mode == 'autounlock' && setting.countdown == nil
@@ -26,9 +28,17 @@ class DashboardController < ApplicationController
       render 'autounlock_timer.html.erb'
 
     elsif setting.mode == 'pinunlock'
+      @pin = setting.pin
       render 'pin.html.erb'
 
     elsif setting.mode == 'forward'
+      @recipient = setting.recipient
+      @forward_nums = []
+      @forward_nums << setting.forward1
+      @forward_nums << setting.forward2
+      @forward_nums << setting.forward3
+      @forward_nums << setting.forward4
+
       render 'forward.html.erb'
 
     else

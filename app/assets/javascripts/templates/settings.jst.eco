@@ -3,34 +3,49 @@
     <h3 class="panel-title">Other Settings</h3>
   </div>
   <div class="panel-body">
+    <form id="settings_form" role="form">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="form-group">
+          <h5>Unlock Digit(s) <span class="label label-warning">Required</span></h5>
+          <input type="text" name="unlock_digits" class="form-control" id="unlockDigits" placeholder="commonly '0' or '9'">
+        </div>
 
-  <form id="settings_form" role="form">
+        <div class="form-group">
+          <h5>Main Cell <span class="label label-warning">Required</span></h5>
+          <input type="text" name="recipient" class="form-control" id="recipient" placeholder="receives texts and calls when door is unlocked">
+        </div>
 
-    <div class="form-group">
-      <label for="unlockDigits">Unlock Digit(s): commonly '0' or '9'. Use 'w' for pauses</label>
-      <input type="text" name="unlock_digits" class="form-control" id="unlockDigits" placeholder="Unlock Digits">
+        <div class="form-group">
+          <h5><input name="text_confirmation" type="hidden" value="0"><input id="text_confirmation" name="text_confirmation" type="checkbox" value="1">
+            SMS confirmation when door unlocked?</h5>
+        </div>
+
+        <div class="form-group">
+          <h5>Pin <span class="label label-success">Optional</span></h5>
+          <input type="text" name="pin" class="form-control" id="pin" placeholder="unlocks door in Pin Unlock mode">
+        </div>
+
+        <div class="form-group">
+          <h5>Additional Cell Numbers <span class="label label-success">Optional</span></h5>
+          <input type="text" name="forward1" class="form-control" id="forward1" placeholder="receives calls when door is unlocked">
+        </div>
+
+        <div class="form-group">
+          <input type="text" name="forward2" class="form-control" id="forward2" placeholder="receives calls when door is unlocked">
+        </div>
+
+        <div class="form-group">
+          <input type="text" name="forward3" class="form-control" id="forward3" placeholder="receives calls when door is unlocked">
+        </div>
+
+        <div class="form-group">
+          <input type="text" name="forward4" class="form-control" id="forward4" placeholder="receives calls when door is unlocked">
+        </div>
+
+        <button type="submit" class="btn btn-primary save-settings">Save</button>
+      </div>
     </div>
-
-    <div class="form-group">
-      <label for="message">Message: texted to recipient when door is unlocked</label>
-      <input type="text" name="message" class="form-control" id="message" placeholder="Message">
-    </div>
-
-    <div class="form-group">
-      <label for="recipient">Recipient: message texted to this phone number when door is unlocked</label>
-      <input type="text" name="recipient" class="form-control" id="recipient" placeholder="Recipient">
-    </div>
-
-    <div class="checkbox">
-
-      <label>
-        <input type="checkbox" name="autounlock"> Auto-unlock? (if checked, Doorman will unlock your gate automatically)
-      </label>
-
-    </div>
-
-    <button type="submit" class="btn btn-default save-settings">Save</button>
-
     </form>
-</div>
+  </div>
 </div>

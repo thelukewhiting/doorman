@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Dial>
+    <Number><%= @recipient %></Number>
+    <% @forward_nums.each do |num| %>
+      <% unless num == '' %>
+        <Number><%= num %></Number>
+      <% end %>
+    <% end %>
+  </Dial>
+</Response>

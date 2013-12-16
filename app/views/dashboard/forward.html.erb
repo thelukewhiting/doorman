@@ -22,7 +22,13 @@
         <h3 class="panel-title">Forward Mode</h3>
       </div>
       <div class="panel-body">
-        You're in forward mode.
+        <p>Incoming calls will be forwarded to:</p>
+        <%= @recipient %>
+          <% @forward_nums.each do |num| %>
+            <% unless num == '' %>
+              <%= num %></br>
+            <% end %>
+          <% end %>
       </div>
     </div>
   </div>

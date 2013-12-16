@@ -9,14 +9,8 @@ $ ->
   handle_mode_click = (button_id) ->
     $("#" + "#{button_id}").on 'click', (event) ->
       event.preventDefault()
-      empty_and_append_setting button_id
-      update_mode button_id
-
-  empty_and_append_setting = (template_name) ->
-    $('.col-md-9').empty().append(JST["templates/" + "#{template_name}"])
-
-  update_mode = (mode) ->
-    $.get( '/settings/update_mode', {mode: mode})
+      $.get( '/settings/update_mode', {mode: button_id}).done (data) ->
+        $('.col-md-9').empty().append(JST["templates/" + "#{button_id}"](settings: data[0]))
 
   handle_mode_click 'manual'
 
