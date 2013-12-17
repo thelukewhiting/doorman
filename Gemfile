@@ -6,6 +6,7 @@ gem 'rails', '3.2.14'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
+gem 'unicorn'
 # gem 'rufus-scheduler'
 gem 'sidekiq'
 gem 'sidekiq-status'
@@ -37,6 +38,7 @@ end
 
 group :test, :development do
   gem 'pry'
+  gem 'pry-remote'
   gem 'rspec-rails'
   gem 'nyan-cat-formatter'
   gem 'konacha'
