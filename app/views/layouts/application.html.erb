@@ -21,7 +21,7 @@
 
         <li><%= link_to "Profile", edit_user_registration_path %></li>
 
-        <% if current_user.setting != nil %>
+        <% if current_user.setting.recipient != nil %>
           <li><%= link_to "Settings", edit_setting_path(current_user.setting.id) %></li>
         <% else %>
           <li><%= link_to "Settings", new_setting_path %></li>
