@@ -8,6 +8,21 @@ class SettingsController < ApplicationController
 
   def new
 
+    setting = current_user.setting
+
+    if setting
+
+      if setting.account_sid && setting.twilio_number == nil
+        render 'area_code.html.erb'
+      elsif setting.account_sid && setting.twilio_number && setting.recipient == nil
+        render 'other_settings.html.erb'
+      else
+        redirect_to action: "edit", id: current_user.setting.id
+      end
+
+    else
+      render 'new.html.erb'
+    end
 
   end
 
@@ -20,21 +35,28 @@ class SettingsController < ApplicationController
 
   def create
 
+    setting = Setting.where(user_id: current_user.id)
 
+    # Uses phony_rails to normalize to the e164 format before saving
+    params[:recipient] = params[:recipient].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
 
-    # setting = Setting.where(user_id: current_user.id)
+    if params[:forward1] != ''
+      params[:forward1] = params[:forward1].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
+    end
 
-    # if params[:autounlock] == 'on'
-      # autounlock = true
-    # else
-      # autounlock = false
-    # end
+    if params[:forward2] != ''
+      params[:forward2] = params[:forward2].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
+    end
 
-    # # Uses phony_rails to normalize to the e164 format before saving
-    # formatted_recipient = params[:recipient].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
+    if params[:forward3] != ''
+      params[:forward3] = params[:forward3].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
+    end
 
-    # setting[0].update_attributes(unlock_digits: params[:unlock_digits], recipient: formatted_recipient, autounlock: autounlock )
+    if params[:forward4] != ''
+      params[:forward4] = params[:forward4].phony_formatted!(:normalize => 'US', :format => :international, :spaces => '')
+    end
 
+    setting[0].update_attributes(unlock_digits: params[:unlock_digits], recipient: params[:recipient], text_confirmation: params[:text_confirmation], pin: params[:pin], forward1: params[:forward1], forward2: params[:forward2], forward3: params[:forward3], forward4: params[:forward4], mode: "manual")
     success = true
 
     respond_to do |format|
@@ -75,21 +97,19 @@ class SettingsController < ApplicationController
 
   def create_twilio_account
 
-    # parent_account_sid = ENV['TWILIO_ACCOUNT_SID']
-    # parent_auth_token = ENV['TWILIO_AUTH_TOKEN']
+    parent_account_sid = ENV['TWILIO_ACCOUNT_SID']
+    parent_auth_token = ENV['TWILIO_AUTH_TOKEN']
 
-    sleep 1
+    client = Twilio::REST::Client.new(parent_account_sid, parent_auth_token)
 
-    # client = Twilio::REST::Client.new(parent_account_sid, parent_auth_token)
+    subaccount = client.accounts.create({:FriendlyName => current_user.email, :VoiceURL => 'https://lukewhiting.fwd.wf/voice/incoming', :VoiceMethod => 'POST'})
 
-    # subaccount = client.accounts.create({:FriendlyName => current_user.email, :VoiceURL => 'http://doormanapp.herokuapp.com/voice/incoming', :VoiceMethod => 'GET'})
+    new_setting = Setting.new
+    new_setting.user_id = current_user.id
+    new_setting.account_sid = subaccount.sid
+    new_setting.twilio_auth_token = subaccount.auth_token
 
-    # new_setting = Setting.new
-    # new_setting.user_id = current_user.id
-    # new_setting.account_sid = subaccount.sid
-    # new_setting.twilio_auth_token = subaccount.auth_token
-
-    # new_setting.save
+    new_setting.save
 
     success = true
 
@@ -183,8 +203,7 @@ class SettingsController < ApplicationController
   def start_timer
 
     setting = Setting.where(user_id: current_user.id)
-    # setting[0].update_attributes(mode: "autounlock")
-    # seconds = params[:seconds].to_s + "s"
+
     seconds = params[:seconds].to_i
 
     status = false
@@ -202,28 +221,6 @@ class SettingsController < ApplicationController
       status = countdown
 
     end
-
-    # if setting[0].countdown == nil
-
-    #   @scheduler = Rufus::Scheduler.new
-
-    #   job_id =
-    #     @scheduler.in seconds do
-    #       setting[0].update_attributes(mode: "manual", countdown: nil, job_id: nil)
-    #     end
-
-    #   job = @scheduler.job(job_id)
-
-    #   setting[0].update_attributes(countdown: job.time.utc, job_id: job_id)
-
-    #   from_time = Time.now.utc
-    #   to_time = job.time.utc
-
-    #   countdown = {countdown: (distance_of_time_in_words(from_time, to_time, include_seconds: true))}
-
-    #   status = countdown
-
-    # end
 
     respond_to do |format|
       format.json {render :json => status}

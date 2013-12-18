@@ -4,12 +4,6 @@
 
 $ ->
 
-  # $(window).on "beforeunload", ->
-    # "Are you sure you want to leave? Your settings will be lost!"
-
-  # $(window).on "beforeunload", ->
-    # "Your settings could be lost!"
-
   createTwilioAccount = ->
 
     $.get '/settings/create_twilio_account', (data) ->
@@ -23,18 +17,23 @@ $ ->
 
     $('.new-setting-flow').empty()
     $('.new-setting-flow').append(JST["templates/area_code"])
+    $( '#area-code-form' ).parsley
 
-  $('body').on 'click', 'button[class="btn btn-primary btn-lg find-numbers"]', (event) ->
+  $('body').on 'click', 'button.find-numbers', (event) ->
+
     event.preventDefault()
 
-    $(this).text('Loading...')
+    if $( '#area-code-form' ).parsley('validate')
 
-    area_code = $(this).prev().val()
+      $(this).text('Loading...')
 
-    $.get( '/settings/fetch_twilio_number', {area_code: area_code}).done (data) ->
-        console.log data
-        $('.new-setting-flow').empty()
-        $('.new-setting-flow').append(JST["templates/twilio_numbers"](numbers: data))
+      area_code = $(this).prev().val()
+
+      $.get( '/settings/fetch_twilio_number', {area_code: area_code}).done (data) ->
+          console.log data
+          $('.new-setting-flow').empty()
+          $('.new-setting-flow').append(JST["templates/twilio_numbers"](numbers: data))
+
 
   $('body').on 'click', 'li[class="number"]', (event) ->
     event.preventDefault()
@@ -49,21 +48,24 @@ $ ->
         $('.new-setting-flow').empty()
         $('.new-setting-flow').append(JST["templates/number_success"](number: data))
 
-  $('body').on 'click', 'button[class="btn btn-primary btn-lg next-settings"]', (event) ->
+  $('body').on 'click', 'button.next-settings', (event) ->
     event.preventDefault()
 
     $('.new-setting-flow').empty()
     $('.new-setting-flow').append(JST["templates/settings"])
 
-  $('body').on 'click', 'button[class="btn btn-default save-settings"]', (event) ->
+
+  $('body').on 'click', 'button.save-settings', (event) ->
     event.preventDefault()
 
-    $.post( "/settings", $('#settings_form').serialize() ).done (data) ->
-        console.log data
-        $('.new-setting-flow').empty()
-        $('.new-setting-flow').append(JST["templates/test_settings"])
+    if $( '#settings_form' ).parsley("validate")
 
-  $('body').on 'click', 'button[class="btn btn-primary btn-lg test-settings"]', (event) ->
+      $.post( "/settings", $('#settings_form').serialize() ).done (data) ->
+          console.log data
+          $('.new-setting-flow').empty()
+          $('.new-setting-flow').append(JST["templates/test_settings"])
+
+  $('body').on 'click', 'button.test-settings', (event) ->
     event.preventDefault()
 
     $.get '/settings/test_settings'

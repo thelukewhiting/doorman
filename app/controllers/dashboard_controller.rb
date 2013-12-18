@@ -8,38 +8,42 @@ class DashboardController < ApplicationController
 
   def index
 
-    setting = current_user.setting
+    if current_user.setting
 
-    if setting.mode == 'manual'
+      setting = current_user.setting
 
-      @recipient = setting.recipient
-      render 'manual.html.erb'
+      if setting.mode == 'manual'
 
-    elsif setting.mode == 'autounlock' && setting.countdown == nil
-      render 'autounlock.html.erb'
+        @recipient = setting.recipient
+        render 'manual.html.erb'
 
-    elsif setting.countdown
+      elsif setting.mode == 'autounlock' && setting.countdown == nil
+        render 'autounlock.html.erb'
 
-      from_time = Time.now.utc
-      to_time = setting.countdown
+      elsif setting.countdown
 
-      @countdown = distance_of_time_in_words(from_time, to_time, include_seconds: true)
+        from_time = Time.now.utc
+        to_time = setting.countdown
 
-      render 'autounlock_timer.html.erb'
+        @countdown = distance_of_time_in_words(from_time, to_time, include_seconds: true)
 
-    elsif setting.mode == 'pinunlock'
-      @pin = setting.pin
-      render 'pin.html.erb'
+        render 'autounlock_timer.html.erb'
 
-    elsif setting.mode == 'forward'
-      @recipient = setting.recipient
-      @forward_nums = []
-      @forward_nums << setting.forward1
-      @forward_nums << setting.forward2
-      @forward_nums << setting.forward3
-      @forward_nums << setting.forward4
+      elsif setting.mode == 'pinunlock'
+        @pin = setting.pin
+        render 'pin.html.erb'
 
-      render 'forward.html.erb'
+      elsif setting.mode == 'forward'
+        @recipient = setting.recipient
+        @forward_nums = []
+        @forward_nums << setting.forward1
+        @forward_nums << setting.forward2
+        @forward_nums << setting.forward3
+        @forward_nums << setting.forward4
+
+        render 'forward.html.erb'
+
+      end
 
     else
       render 'no_setting.html.erb'

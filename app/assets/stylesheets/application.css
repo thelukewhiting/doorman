@@ -24,4 +24,21 @@
 
  .logolink {
   text-decoration: none !important;
- }
+}
+
+ input.parsley-error {
+  color: #a94442 !important;
+  background-color: #f2dede !important;
+  border-color: #a94442 !important;
+}
+
+input.parsley-error:focus {
+  border-color: #843534 !important;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483 !important;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483 !important;
+}
+
+ul.parsley-error-list {
+  color: #a94442;
+  margin: 5px;
+}

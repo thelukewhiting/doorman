@@ -4,17 +4,17 @@
   </div>
   <div class="panel-body">
 
-  <%= form_for @setting do  |f|  %>
+  <%= form_for @setting, :html => {:"parsley-validate" => ''} do  |f|  %>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <div class="form-group">
         <h5>Unlock Digit(s) <span class="label label-warning">Required</span></h5>
-        <%= f.text_field :unlock_digits, :class => "form-control", :placeholder => "commonly '0' or '9'" %></div>
+        <%= f.text_field  :unlock_digits, :"parsley-required" => "true", :class => "form-control", :placeholder => "commonly '0' or '9'" %></div>
 
       <div class="form-group">
         <h5>Main Cell <span class="label label-warning">Required</span></h5>
-        <%= f.text_field :recipient, :class => "form-control", :placeholder => "receives texts & calls when door is unlocked" %></div>
+        <%= f.text_field :recipient, :"parsley-type" => "phone", :"parsley-required" => "true", :class => "form-control", :placeholder => "receives texts & calls when door is unlocked" %></div>
 
       <div class="form-group">
         <h5><%= f.check_box :text_confirmation %> SMS confirmation when door unlocked?</h5>
@@ -22,20 +22,20 @@
 
       <div class="form-group">
         <h5>Pin <span class="label label-success">Optional</span></h5>
-        <%= f.text_field :pin, :class => "form-control", :placeholder => "unlocks door in Pin Unlock mode" %></div>
+        <%= f.text_field :pin, :"parsley-type" => "digits", :"parsley-minlength" => "4", :class => "form-control", :placeholder => "unlocks door in Pin Unlock mode" %></div>
 
       <div class="form-group">
         <h5>Additional Cell Numbers <span class="label label-success">Optional</span></h5>
-        <%= f.text_field :forward1, :class => "form-control", :placeholder => "receives texts & calls when door is unlocked" %></div>
+        <%= f.text_field :forward1, :"parsley-type" => "phone", :class => "form-control", :placeholder => "receives texts & calls when door is unlocked" %></div>
 
       <div class="form-group">
-        <%= f.text_field :forward2, :class => "form-control", :placeholder => "receives texts & calls when door is unlocked" %></div>
+        <%= f.text_field :forward2, :"parsley-type" => "phone", :class => "form-control", :placeholder => "receives texts & calls when door is unlocked" %></div>
 
       <div class="form-group">
-        <%= f.text_field :forward3, :class => "form-control", :placeholder => "receives texts & calls when door is unlocked" %></div>
+        <%= f.text_field :forward3, :"parsley-type" => "phone", :class => "form-control", :placeholder => "receives texts & calls when door is unlocked" %></div>
 
       <div class="form-group">
-        <%= f.text_field :forward4, :class => "form-control", :placeholder => "receives texts & calls when door is unlocked" %></div>
+        <%= f.text_field :forward4, :"parsley-type" => "phone", :class => "form-control", :placeholder => "receives texts & calls when door is unlocked" %></div>
 
       <div><%= f.submit "Save", :class => "btn btn-primary" %></div>
 
