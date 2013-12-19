@@ -3,7 +3,7 @@
     <Say>Hi, this is the Doorman App, calling to test your settings. Your unlock digits are <%= @unlock_digits %>.</Say>
     <Say>Now playing unlock digits.</Say>
     <Play digits="<%= @unlock_digits%>"></Play>
-    <Sms to="<%=@recipient %>"><%= @message %></Sms>
+    <Sms to="<%=@recipient %>">"Here's a test text message from Doorman!"</Sms>
     <Say>I just sent a text message to your recipient.</Say>
     <Say>Goodbye!</Say>
 </Response>

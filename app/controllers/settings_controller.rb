@@ -123,14 +123,14 @@ class SettingsController < ApplicationController
 
     area_code = params[:area_code]
 
-    # setting = Setting.where(user_id: current_user.id)
+    setting = Setting.where(user_id: current_user.id)
 
-    # account_sid = setting[0].account_sid
-    # twilio_auth_token = setting[0].twilio_auth_token
+    account_sid = setting[0].account_sid
+    twilio_auth_token = setting[0].twilio_auth_token
 
     # Using primary account SID & auth token for testing (comment out for production)
-    account_sid = ENV['TWILIO_ACCOUNT_SID']
-    twilio_auth_token = ENV['TWILIO_AUTH_TOKEN']
+    # account_sid = ENV['TWILIO_ACCOUNT_SID']
+    # twilio_auth_token = ENV['TWILIO_AUTH_TOKEN']
 
     sub_account_client = Twilio::REST::Client.new(account_sid, twilio_auth_token)
     subaccount = sub_account_client.account
@@ -154,18 +154,18 @@ class SettingsController < ApplicationController
 
     sleep 0.5
 
-    # setting = Setting.where(user_id: current_user.id)
+    setting = Setting.where(user_id: current_user.id)
 
-    # account_sid = setting[0].account_sid
-    # twilio_auth_token = setting[0].twilio_auth_token
+    account_sid = setting[0].account_sid
+    twilio_auth_token = setting[0].twilio_auth_token
 
-    # sub_account_client = Twilio::REST::Client.new(account_sid, twilio_auth_token)
-    # subaccount = sub_account_client.account
+    sub_account_client = Twilio::REST::Client.new(account_sid, twilio_auth_token)
+    subaccount = sub_account_client.account
 
-    # subaccount.incoming_phone_numbers.create(:phone_number => twilio_number)
+    subaccount.incoming_phone_numbers.create(:phone_number => twilio_number)
 
-    # setting = Setting.where(user_id: current_user.id)
-    # setting[0].update_attributes(twilio_number: twilio_number)
+    setting = Setting.where(user_id: current_user.id)
+    setting[0].update_attributes(twilio_number: twilio_number)
 
     success_number = {twilio_number: twilio_number}
 

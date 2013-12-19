@@ -35,7 +35,11 @@ class VoiceController < ApplicationController
         render 'autounlock.xml.erb', content_type: 'text/xml', layout: false
 
       when 'pinunlock'
-        render 'pinunlock.xml.erb', content_type: 'text/xml', layout: false
+        if setting.pin == nil || setting.pin == ''
+          render 'manual.xml.erb', content_type: 'text/xml', layout: false
+        else
+          render 'pincapture.xml.erb', content_type: 'text/xml', layout: false
+        end
 
       when 'forward'
         @forward_nums = []

@@ -1,14 +1,18 @@
-<div class="new-setting-flow">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Enter Your Area Code</h3>
-    </div>
-    <div class="panel-body">
-      <form parsley-validate id="area-code-form">
-        <label>Enter a US area code: </label>
-        <input type="text" size="3" name="area_code" parsley-type="digits" parsley-rangelength="[3,3]"/>
-        <button type="button" class="btn btn-primary btn-lg find-numbers">Find Available Numbers</button>
-      </form>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="new-setting-flow">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Step 1 of 3: Phone Number</h3>
+        </div>
+        <div class="panel-body">
+          <p>Enter any US area code:</p>
+          <form parsley-validate id="area-code-form">
+            <input type="text" size="3" name="area_code" parsley-type="digits" parsley-rangelength="[3,3]">
+            <span class="pull-right"><button type="button" class="btn btn-primary find-numbers">Next...</button></span>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>

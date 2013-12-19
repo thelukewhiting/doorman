@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Doorman</title>
+  <%= favicon_link_tag '/favicon.png', type: 'image/png' %>
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= stylesheet_link_tag    "jumbotron-narrow", :media => "all" %>
@@ -10,52 +11,87 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="container">
+    <div class="header">
+      <ul class="nav nav-pills pull-right">
 
-<div class="container">
-  <div class="header">
-    <ul class="nav nav-pills pull-right">
-
-      <% if user_signed_in? %>
-
-        <li><%= link_to "Dashboard", dashboard_path %></li>
-
-        <li><%= link_to "Profile", edit_user_registration_path %></li>
-
-        <% if current_user.setting.recipient != nil %>
-          <li><%= link_to "Settings", edit_setting_path(current_user.setting.id) %></li>
-        <% else %>
+        <% if user_signed_in? %>
+          <li><%= link_to "Dashboard", dashboard_path %></li>
           <li><%= link_to "Settings", new_setting_path %></li>
+          <li><%= link_to "Profile", edit_user_registration_path %></li>
+
+          <% if current_user.setting %>
+            <% if current_user.setting.recipient != nil %>
+              <li><%= link_to "Dashboard", dashboard_path %></li>
+              <li><%= link_to "Settings", edit_setting_path(current_user.setting.id) %></li>
+              <li><%= link_to "Profile", edit_user_registration_path %></li>
+            <% end %>
+          <% end %>
+
+          <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <li><%= link_to "Login", new_user_session_path %></li>
         <% end %>
-        <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+      </ul>
+        <% if current_page?('/') == false  %>
+          <h3><a href="/" class="logolink"><i class="fa fa-lock"></i> <span class="logo">Doorman</span></h3></a>
+        <% end %>
+
+    </div>
+
+  <% if notice || alert %>
+    <div class="alert alert-warning fade in">
+      <div id="flash">
+        <%= notice %>
+        <%= alert %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= yield %>
+
+<!-- Modal -->
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">About Doorman</h4>
+      </div>
+      <div class="modal-body">
+
+        <p>Doorman was built during General Assembly's <%= link_to "Web Development Immersive", "http://generalassemb.ly/education/web-development-immersive" %> using Ruby on Rails, Devise, PostgreSQL, jQuery, CoffeeScript, Bootstrap, Sidekiq, and Unicorn.</p>
+
+        <div class="media">
+          <a class="pull-left" href="https://github.com/zestos">
+            <%= image_tag("luke.jpg", class: "media-object img-rounded", height: "64", width: "64", alt: "Luke Whiting") %>
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">Luke Whiting</h4>
+            <a href="http://lukewhiting.com" target="_blank">Blog</a> |
+            <a href="http://github.com/zestos" target="_blank">Github</a> |
+            <a href="http://linkedin.com/in/lukewhiting" target="_blank">LinkedIn</a> |
+            <a href="http://twitter.com/zestos20" target="_blank">Twitter</a>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <span class="pull-left">&#169; 2013</span>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+    <div class="footer">
+      <% if user_signed_in? %>
+        <a id="about-link" href="#">About</a> | logged in as <strong><%= link_to current_user.email, edit_user_registration_path %></strong>
       <% else %>
-        <li><%= link_to "Sign Up", new_user_registration_path %></li>
-        <li class="active"><%= link_to "Login", new_user_session_path %></li>
+        <a id="about-link" href="#">About</a>
       <% end %>
-    </ul>
-    <h3><span class="logo"><a href="/" class="logolink"><i class="fa fa-lock"></i> Doorman</span></h3></a>
+    </div>
   </div>
-
-
-<!-- <div class="alert alert-warning fade in">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <div id="flash"><%= notice %>
-  <%= alert %></div>
-</div> -->
-
-
-<%= yield %>
-
-  <div class="footer">
-
-    <% if user_signed_in? %>
-      <p>&copy;2013 Luke Whiting | logged in as <strong><%= link_to current_user.email, edit_user_registration_path %></strong></p>
-    <% else %>
-      <p>&copy;2013 Luke Whiting</p>
-    <% end %>
-
-  </div>
-
-</div>
 
 </body>
 </html>

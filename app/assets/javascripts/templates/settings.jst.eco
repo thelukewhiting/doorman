@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Other Settings</h3>
+    <h3 class="panel-title">Step 2 of 3: Other Settings</h3>
   </div>
   <div class="panel-body">
     <form parsley-validate id="settings_form" role="form">
@@ -8,39 +8,39 @@
       <div class="col-md-6 col-md-offset-3">
         <div class="form-group">
           <h5>Unlock Digit(s) <span class="label label-warning">Required</span></h5>
-          <input type="text" parsley-required="true" name="unlock_digits" class="form-control" id="unlockDigits" placeholder="commonly '0' or '9'">
+          <input type="text" parsley-required="true" name="unlock_digits" class="form-control" id="unlockDigits" placeholder="usually '0' or '9'">
         </div>
 
         <div class="form-group">
           <h5>Main Cell <span class="label label-warning">Required</span></h5>
-          <input type="text" parsley-required="true" parsley-type="phone" name="recipient" class="form-control" id="recipient" placeholder="receives texts and calls when door is unlocked">
+          <input type="text" parsley-required="true" parsley-type="phone" name="recipient" class="form-control" id="recipient" placeholder="cell phone number">
         </div>
 
         <div class="form-group">
           <h5><input name="text_confirmation" type="hidden" value="0"><input id="text_confirmation" name="text_confirmation" type="checkbox" value="1">
-            SMS confirmation when door unlocked?</h5>
+            Text on unlock?</h5>
         </div>
 
         <div class="form-group">
           <h5>Pin <span class="label label-success">Optional</span></h5>
-          <input type="text" parsley-type="digits" parsley-minlength="4" name="pin" class="form-control" id="pin" placeholder="unlocks door in Pin Unlock mode">
+          <input type="text" parsley-type="digits" parsley-minlength="4" name="pin" class="form-control" id="pin" placeholder="at least 4 digits">
         </div>
 
         <div class="form-group">
-          <h5>Additional Cell Numbers <span class="label label-success">Optional</span></h5>
-          <input type="text" parsley-type="phone" name="forward1" class="form-control" id="forward1" placeholder="receives calls when door is unlocked">
+          <h5>Additional Cell(s) <span class="label label-success">Optional</span></h5>
+          <input type="text" parsley-type="phone" name="forward1" class="form-control" id="forward1" placeholder="cell phone number">
         </div>
 
         <div class="form-group">
-          <input type="text" parsley-type="phone" name="forward2" class="form-control" id="forward2" placeholder="receives calls when door is unlocked">
+          <input type="text" parsley-type="phone" name="forward2" class="form-control" id="forward2" placeholder="cell phone number">
         </div>
 
         <div class="form-group">
-          <input type="text" parsley-type="phone" name="forward3" class="form-control" id="forward3" placeholder="receives calls when door is unlocked">
+          <input type="text" parsley-type="phone" name="forward3" class="form-control" id="forward3" placeholder="cell phone number">
         </div>
 
         <div class="form-group">
-          <input type="text" parsley-type="phone" name="forward4" class="form-control" id="forward4" placeholder="receives calls when door is unlocked">
+          <input type="text" parsley-type="phone" name="forward4" class="form-control" id="forward4" placeholder="cell phone number">
         </div>
 
         <button class="btn btn-primary save-settings">Save</button>

@@ -4,6 +4,11 @@
 
 $ ->
 
+  $alert = $(".alert").alert()
+  setTimeout (->
+    $alert.alert "close"
+  ), 3000
+
   createTwilioAccount = ->
 
     $.get '/settings/create_twilio_account', (data) ->
@@ -27,7 +32,7 @@ $ ->
 
       $(this).text('Loading...')
 
-      area_code = $(this).prev().val()
+      area_code = $(this).parent().prev().val()
 
       $.get( '/settings/fetch_twilio_number', {area_code: area_code}).done (data) ->
           console.log data

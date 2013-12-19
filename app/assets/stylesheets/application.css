@@ -12,21 +12,45 @@
  *= require_tree .
  */
 
- html {
-  border-top: solid 3px #428bca;
-  border-top-width: 3px;
+html {
+  border-top: solid 4px #428bca;
+  /*border-top-width: 3px;*/
   border-top-style: solid;
 }
 
- .logo {
+.alert {
+  position: relative !important;
+}
+
+/*img {
+  position: relative;
+  left: -7px;
+  margin-top: 20px;
+  margin-right: 20px;
+  display: inline;
+}*/
+
+.splash {
+  margin-top: 70px;
+}
+
+
+.logo {
   font-family: 'Coustard', serif;
 }
 
- .logolink {
+.headline {
+  font-family: 'Coustard', serif !important;
+  margin-top: 0px;
+  color: #428bca;
+  /*border-left: solid 2px #428bca;*/
+}
+
+.logolink {
   text-decoration: none !important;
 }
 
- input.parsley-error {
+input.parsley-error {
   color: #a94442 !important;
   background-color: #f2dede !important;
   border-color: #a94442 !important;

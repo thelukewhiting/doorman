@@ -3,6 +3,10 @@
     <h3 class="panel-title">Pin Unlock Mode</h3>
   </div>
   <div class="panel-body">
-    Enter '<%= @settings.pin %>' on the keypad to unlock the gate.
+<% if @settings.pin: %>
+  Enter '<%= @settings.pin %>' on the keypad to unlock the gate.
+<% else: %>
+  You need to set up a pin first.
+<% end %>
   </div>
 </div>

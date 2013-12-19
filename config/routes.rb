@@ -1,8 +1,10 @@
+sk_route = '/sidekiq/' + ENV['SIDEKIQ_SECRET']
+
 Doorman::Application.routes.draw do
 
   require 'sidekiq/web'
 
-  mount Sidekiq::Web => '/sidekiq'
+  mount Sidekiq::Web => sk_route
 
   get "dashboard/index"
 

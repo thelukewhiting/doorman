@@ -3,11 +3,11 @@
     <h3 class="panel-title">Forward Mode</h3>
   </div>
   <div class="panel-body">
-    <p>Incoming calls will be forwarded to:</p>
-      <%= @settings.recipient %>
-      <%= @settings.forward1 if @settings.forward1 != '' %>
-      <%= @settings.forward2 if @settings.forward2 != '' %>
-      <%= @settings.forward3 if @settings.forward3 != '' %>
-      <%= @settings.forward4 if @settings.forward4 != '' %>
+    <p>All unlock calls will be forwarded to:</p>
+      <p><b><%= @settings.recipient %></b></p>
+      <p><b><%= @settings.forward1 if @settings.forward1 != '' %></b></p>
+      <p><b><%= @settings.forward2 if @settings.forward2 != '' %></b></p>
+      <p><b><%= @settings.forward3 if @settings.forward3 != '' %></b></p>
+      <p><b><%= @settings.forward4 if @settings.forward4 != '' %></b></p>
   </div>
 </div>

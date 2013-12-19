@@ -4,8 +4,8 @@
   </div>
   <div class="panel-body">
 
-    <h5>Timer will expire in <%= @countdown %></h5>
-    <p>Switching out of Auto Unlock mode will cancel timer.</p>
+    <p>Timer will expire in: <b><%= @countdown %></b></p>
+    <p>Note: switching out of Auto Unlock mode will cancel timer.</p>
 
     <button type='button' class='btn btn-primary cancel-timer'>Cancel Timer</button>
   </div>
