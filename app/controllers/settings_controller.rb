@@ -160,7 +160,7 @@ class SettingsController < ApplicationController
     sub_account_client = Twilio::REST::Client.new(account_sid, twilio_auth_token)
     subaccount = sub_account_client.account
 
-    subaccount.incoming_phone_numbers.create(:PhoneNumber => twilio_number, :VoiceURL => 'http://doormanapp.herokuapp.com/voice/incoming', :VoiceMethod => 'POST')
+    subaccount.incoming_phone_numbers.create(:PhoneNumber => twilio_number, :VoiceUrl => 'http://doormanapp.herokuapp.com/voice/incoming', :VoiceMethod => 'POST')
 
     setting = Setting.where(user_id: current_user.id)
     setting[0].update_attributes(twilio_number: twilio_number)
