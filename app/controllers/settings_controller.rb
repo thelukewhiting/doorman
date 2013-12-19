@@ -102,7 +102,7 @@ class SettingsController < ApplicationController
 
     client = Twilio::REST::Client.new(parent_account_sid, parent_auth_token)
 
-    subaccount = client.accounts.create({:FriendlyName => current_user.email, :VoiceURL => 'http://doormanapp.herokuapp.com/voice/incoming', :VoiceMethod => 'POST'})
+    subaccount = client.accounts.create({:FriendlyName => current_user.email, :VoiceUrl => 'http://doormanapp.herokuapp.com/voice/incoming', :VoiceMethod => 'POST'})
 
     new_setting = Setting.new
     new_setting.user_id = current_user.id

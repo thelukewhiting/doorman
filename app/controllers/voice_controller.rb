@@ -17,7 +17,7 @@ class VoiceController < ApplicationController
       @pin = setting.pin
 
       if params[:Digits].to_i == @pin
-        render 'autounlock.xml.erb', content_type: 'text/xml', layout: false
+        render 'pinunlock.xml.erb', content_type: 'text/xml', layout: false
       else
         render 'pinunlock_error.xml.erb', content_type: 'text/xml', layout: false
       end

@@ -5,6 +5,6 @@
 $ ->
   $('#about-link').on "click", (event) ->
     event.preventDefault()
-    console.log "clicked!"
+    # console.log "clicked!"
 
     $('#aboutModal').modal('show')

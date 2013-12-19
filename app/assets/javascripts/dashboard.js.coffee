@@ -36,4 +36,4 @@ $ ->
 
       $.get( '/settings/start_timer', {seconds: seconds}).done (data) ->
         $('.col-md-9').empty().append(JST["templates/autounlock_timer"](countdown: data.countdown))
-        console.log data.countdown
+        # console.log data.countdown

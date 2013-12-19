@@ -45,10 +45,10 @@ $ ->
 
     number = $(this).children().text()
 
-    console.log number
+    # console.log number
 
     $.get( '/settings/buy_twilio_number', {phone_number: number}).done (data) ->
-        console.log data
+        # console.log data
 
         $('.new-setting-flow').empty()
         $('.new-setting-flow').append(JST["templates/number_success"](number: data))
@@ -66,23 +66,12 @@ $ ->
     if $( '#settings_form' ).parsley("validate")
 
       $.post( "/settings", $('#settings_form').serialize() ).done (data) ->
-          console.log data
+          # console.log data
           $('.new-setting-flow').empty()
           $('.new-setting-flow').append(JST["templates/test_settings"])
 
   $('body').on 'click', 'button.test-settings', (event) ->
     event.preventDefault()
+    $(this).text('Working...')
 
     $.get '/settings/test_settings'
-
-
-
-
-
-
-
-
-
-
-
-

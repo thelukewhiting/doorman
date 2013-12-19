@@ -3,7 +3,7 @@
     <h3 class="panel-title">Step 1 of 3: Phone Number</h3>
   </div>
   <div class="panel-body">
-    You're new number is: <b><%= @number.twilio_number %></b>
+    Your new number is: <b><%= @number.twilio_number %></b>
     <span class="pull-right"><button type="button" class="btn btn-primary next-settings">Next...</button></span>
   </div>
 </div>

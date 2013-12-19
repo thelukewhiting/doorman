@@ -4,9 +4,9 @@
   </div>
   <div class="panel-body">
 <% if @settings.pin: %>
-  Enter '<%= @settings.pin %>' on the keypad to unlock the gate.
+  <p>Enter <b>'<%= @settings.pin %>'</b> on the keypad to unlock the gate.</p>
 <% else: %>
-  You need to set up a pin first.
+  <p>You need to set up a pin first.</p>
 <% end %>
   </div>
 </div>
