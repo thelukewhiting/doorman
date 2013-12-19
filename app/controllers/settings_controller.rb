@@ -189,7 +189,7 @@ class SettingsController < ApplicationController
     call = twilio_client.account.calls.create(
       :from => twilio_number,
       :to => recipient,
-      :url => 'https://lukewhiting.fwd.wf/voice/settings_test',
+      :url => 'http://doormanapp.herokuapp.com/voice/settings_test',
     )
 
     success = true
