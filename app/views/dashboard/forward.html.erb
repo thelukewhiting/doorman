@@ -23,7 +23,7 @@
       </div>
       <div class="panel-body">
         <p>All unlock calls will be forwarded to:</p>
-        <%= @recipient %>
+        <p><b><%= @recipient %></b></p>
           <% @forward_nums.each do |num| %>
             <% unless num == '' %>
               <p><b><%= num %></b></p>
