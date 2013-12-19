@@ -102,7 +102,7 @@ class SettingsController < ApplicationController
 
     client = Twilio::REST::Client.new(parent_account_sid, parent_auth_token)
 
-    subaccount = client.accounts.create({:FriendlyName => current_user.email, :VoiceUrl => 'http://doormanapp.herokuapp.com/voice/incoming', :VoiceMethod => 'POST'})
+    subaccount = client.accounts.create({:FriendlyName => current_user.email})
 
     new_setting = Setting.new
     new_setting.user_id = current_user.id
@@ -152,8 +152,6 @@ class SettingsController < ApplicationController
 
     twilio_number = params[:phone_number]
 
-    sleep 0.5
-
     setting = Setting.where(user_id: current_user.id)
 
     account_sid = setting[0].account_sid
@@ -162,7 +160,7 @@ class SettingsController < ApplicationController
     sub_account_client = Twilio::REST::Client.new(account_sid, twilio_auth_token)
     subaccount = sub_account_client.account
 
-    subaccount.incoming_phone_numbers.create(:phone_number => twilio_number)
+    subaccount.incoming_phone_numbers.create(:PhoneNumber => twilio_number, :VoiceURL => 'http://doormanapp.herokuapp.com/voice/incoming', :VoiceMethod => 'POST')
 
     setting = Setting.where(user_id: current_user.id)
     setting[0].update_attributes(twilio_number: twilio_number)
