@@ -18,12 +18,11 @@
         <% if user_signed_in? %>
           <% if current_user.setting %>
           <!-- Checks to see if user completed initial setup  -->
-            <% if current_user.setting.recipient %>
-              <li><%= link_to "Dashboard", dashboard_path %></li>
-              <li><%= link_to "Settings", edit_setting_path(current_user.setting.id) %></li>
-              <li><%= link_to "Profile", edit_user_registration_path %></li>
-              <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-            <% end %>
+            <li><%= link_to "Dashboard", dashboard_path %></li>
+            <li><%= link_to "Settings", edit_setting_path(current_user.setting.id) %></li>
+            <li><%= link_to "Profile", edit_user_registration_path %></li>
+            <li class="active"><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+
           <% else %>
             <li><%= link_to "Dashboard", dashboard_path %></li>
             <li><%= link_to "Settings", new_setting_path %></li>
